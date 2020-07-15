@@ -67,7 +67,7 @@ namespace Quartz.Examples.AspNetCore
 
             // base configuration for DI, read from appSettings.json
             services.Configure<QuartzOptions>(Configuration.GetSection("Quartz"));
-            
+
             // if you are using persistent job store, you might want to alter some options
             services.Configure<QuartzOptions>(options =>
             {
@@ -131,7 +131,7 @@ namespace Quartz.Examples.AspNetCore
                     .WithCronSchedule("0/3 * * * * ?")
                     .WithDescription("my awesome cron trigger")
                 );
-                
+
                 // auto-interrupt long-running job
                 q.UseJobAutoInterrupt(options =>
                 {
@@ -204,7 +204,7 @@ namespace Quartz.Examples.AspNetCore
                 });
                 */
             });
-            
+
             // we can use options pattern to support hooking your own configuration with Quartz's
             // because we don't use service registration api, we need to manally ensure the job is present in DI
             services.AddTransient<ExampleJob>();
@@ -258,6 +258,7 @@ namespace Quartz.Examples.AspNetCore
             {
                 endpoints.MapRazorPages();
                 endpoints.MapHealthChecksUI();
+                endpoints.MapControllers();
             });
         }
     }

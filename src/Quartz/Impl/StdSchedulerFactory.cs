@@ -318,7 +318,7 @@ Please add configuration to your application config file to correctly initialize
             // now check against allowed
             foreach (var configurationKey in cfg.UnderlyingProperties.AllKeys)
             {
-                if (configurationKey is null 
+                if (configurationKey is null
                     || !configurationKey.StartsWith(ConfigurationKeyPrefix)
                     || configurationKey.StartsWith(ConfigurationKeyPrefixServer))
                 {
@@ -431,7 +431,13 @@ Please add configuration to your application config file to correctly initialize
                     schedInstId = DefaultInstanceId;
                 }
 
-                var proxyType = loadHelper.LoadType(cfg.GetStringProperty(PropertySchedulerProxyType)) ?? typeof(RemotingSchedulerProxyFactory);
+#if REMOTING
+                var type = typeof(RemotingSchedulerProxyFactory);
+#else
+                var type = typeof(HttpSchedulerProxyFactory);
+#endif
+
+                var proxyType = loadHelper.LoadType(cfg.GetStringProperty(PropertySchedulerProxyType)) ?? type;
                 IRemotableSchedulerProxyFactory factory;
                 try
                 {

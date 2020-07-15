@@ -62,6 +62,8 @@ ProjectSection(SolutionItems) = preProject
 	.github\workflows\docs.yml = .github\workflows\docs.yml
 EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quartz.Plugins.HttpApi", "src\Quartz.Plugins.HttpApi\Quartz.Plugins.HttpApi.csproj", "{FDFD1F19-913F-41C4-8F80-CE26FF173E08}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -136,6 +138,10 @@ Global
 		{A41539B5-18CC-4881-9E88-3C0BA55716D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A41539B5-18CC-4881-9E88-3C0BA55716D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A41539B5-18CC-4881-9E88-3C0BA55716D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FDFD1F19-913F-41C4-8F80-CE26FF173E08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDFD1F19-913F-41C4-8F80-CE26FF173E08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDFD1F19-913F-41C4-8F80-CE26FF173E08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDFD1F19-913F-41C4-8F80-CE26FF173E08}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

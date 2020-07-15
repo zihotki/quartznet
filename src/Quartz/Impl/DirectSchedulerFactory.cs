@@ -146,7 +146,11 @@ namespace Quartz.Impl
 		{
 			string uid = QuartzSchedulerResources.GetUniqueIdentifier(schedulerName, schedulerInstanceId);
 
+#if REMOTING
 		    var proxyBuilder = new RemotingSchedulerProxyFactory();
+#else
+            var proxyBuilder = new HttpSchedulerProxyFactory();
+#endif
 		    proxyBuilder.Address = proxyAddress;
 		    RemoteScheduler remoteScheduler = new RemoteScheduler(uid, proxyBuilder);
 
@@ -217,20 +221,20 @@ namespace Quartz.Impl
 	    /// <param name="idleWaitTime">The idle wait time. You can specify TimeSpan.Zero for
 	    ///     the default value, which is currently 30000 ms.</param>
 	    public virtual void CreateScheduler(
-		    string schedulerName, 
+		    string schedulerName,
 		    string schedulerInstanceId,
 		    IThreadPool threadPool,
 		    IJobStore jobStore,
-		    IDictionary<string, ISchedulerPlugin>? schedulerPluginMap, 
+		    IDictionary<string, ISchedulerPlugin>? schedulerPluginMap,
 		    TimeSpan idleWaitTime)
 		{
 			CreateScheduler(
                 schedulerName,
                 schedulerInstanceId,
                 threadPool,
-                jobStore, 
+                jobStore,
                 schedulerPluginMap,
-                idleWaitTime, 
+                idleWaitTime,
                 DefaultBatchMaxSize,
                 DefaultBatchTimeWindow);
 		}
@@ -260,8 +264,8 @@ namespace Quartz.Impl
 	    {
 	        CreateScheduler(
 		        schedulerName,
-		        schedulerInstanceId, 
-		        threadPool, 
+		        schedulerInstanceId,
+		        threadPool,
 		        jobStore,
 		        schedulerPluginMap,
 		        idleWaitTime,
