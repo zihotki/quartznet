@@ -1,5 +1,5 @@
 ﻿using System;
-
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
 #if SUPPORTS_HEALTH_CHECKS
@@ -25,5 +25,7 @@ namespace Quartz
 
             return services.AddQuartzHostedService(configure);
         }
+
+        
     }
 }

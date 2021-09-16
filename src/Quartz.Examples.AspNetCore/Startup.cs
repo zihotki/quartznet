@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Globalization;
 
 using Microsoft.AspNetCore.Builder;
@@ -10,7 +10,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
 using OpenTelemetry.Trace;
-
+using Quartz.HttpApi.Controllers;
 using Quartz.Impl.Calendar;
 using Quartz.Impl.Matchers;
 using Quartz.Plugin.Interrupt;
@@ -44,10 +44,11 @@ namespace Quartz.Examples.AspNetCore
                 loggingBuilder.AddSerilog(dispose: true);
             });
 
+            /* //TODO: fix
             services.AddOpenTelemetryTracing(builder =>
             {
                 builder
-                    .AddQuartzInstrumentation()
+                    //.AddQuartzInstrumentation()
                     .AddZipkinExporter(o =>
                     {
                         o.Endpoint = new Uri("http://localhost:9411/api/v2/spans");
@@ -62,6 +63,13 @@ namespace Quartz.Examples.AspNetCore
                         o.AgentPort = 6831;
                     });
             });
+            */
+
+            services.AddControllers(o =>
+            {
+                o.Conventions.Insert(0, new QuartzRoutePrefixConvention());
+            })
+                .AddApplicationPart(typeof(JobsController).Assembly);
 
             services.AddRazorPages();
 
@@ -258,6 +266,8 @@ namespace Quartz.Examples.AspNetCore
             {
                 endpoints.MapRazorPages();
                 endpoints.MapHealthChecksUI();
+
+                // controllers from all referenced 
                 endpoints.MapControllers();
             });
         }
